@@ -85,9 +85,9 @@ class ParlayXClient:
 
     @staticmethod
     def send_reception_response():
-        response = collections.namedtuple('SoapResponse', ['body', 'content_type', 'status'])
+        response = collections.namedtuple('SoapResponse', [ 'status', 'content', 'content_type', 'content_length'])
 
-        body = """<?xml version="1.0" encoding="utf-8"?>
+        content = """<?xml version="1.0" encoding="utf-8"?>
         <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://www.csapi. org/wsdl/parlayx/sms/v1_0/notification" xmlns:types="http://www.csapi.org/wsdl/parlayx/sms/v1_0/notification/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
         <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
         <q1:notifySmsReceptionResponse xmlns:q1="http://www.csapi.org/wsdl/parlayx/sms" />
@@ -96,9 +96,10 @@ class ParlayXClient:
         </xml>
         """
         content_type = 'text/xml'
+        content_length = str(len(content))
         status = 200
 
-        return response(body, content_type, status)
+        return response(status, content, content_type, content_length)
 
 
 def recursive_asdict(d):
