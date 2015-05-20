@@ -24,7 +24,7 @@ test_requirements = [
 
 setup(
     name='pysimpleparlayx',
-    version='0.1.0',
+    version='0.1.1',
     description="PySimpleParlayX is simple implementation of ParlayX",
     long_description=readme + '\n\n' + history,
     author="Marko Benko",
