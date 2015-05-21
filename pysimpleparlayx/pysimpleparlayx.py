@@ -37,9 +37,6 @@ class ParlayXClient:
         # Make Suds Client
         self.client = Client(url=wsdl, location=location, transport=transport_auth, faults=self.faults)
 
-        # Set location
-        self.client.set_options(location=location)
-
     def send_sms(self, phone_numbers, sender, price, message):
         """
             Send SMS.
@@ -87,14 +84,7 @@ class ParlayXClient:
     def send_reception_response():
         response = collections.namedtuple('SoapResponse', [ 'status', 'content', 'content_type', 'content_length'])
 
-        content = """<?xml version="1.0" encoding="utf-8"?>
-        <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://www.csapi. org/wsdl/parlayx/sms/v1_0/notification" xmlns:types="http://www.csapi.org/wsdl/parlayx/sms/v1_0/notification/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-        <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-        <q1:notifySmsReceptionResponse xmlns:q1="http://www.csapi.org/wsdl/parlayx/sms" />
-        </soap:Body>
-        </soap:Envelope>
-        </xml>
-        """
+        content = """<?xml version="1.0" encoding="utf-8"?><soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://www.csapi. org/wsdl/parlayx/sms/v1_0/notification" xmlns:types="http://www.csapi.org/wsdl/parlayx/sms/v1_0/notification/encodedTypes" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"><q1:notifySmsReceptionResponse xmlns:q1="http://www.csapi.org/wsdl/parlayx/sms" /></soap:Body></soap:Envelope>"""
         content_type = 'text/xml'
         content_length = str(len(content))
         status = 200
